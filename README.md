@@ -2,18 +2,18 @@
 
 # DRDO Scientist Records Dashboard
 
-A secure, full-stack internal portal for **role-based management** of scientists and administrators at DRDO.\
-The system enables supervisors and admins to manage personnel records, assign groups, and securely access sensitive information.
+A full-stack internal portal for **role-based management** of scientists and administrators in a DRDO-style organization. The current implementation is a working prototype focused on secure access, scientist record management, group assignment, and document handling.
 
 ---
 
 ## 🔍 Objective
 
-To develop a **centralized, digital solution** that streamlines the management of sensitive personnel data, ensuring:
+To build a **centralized internal solution** for managing sensitive personnel data, ensuring:
 
 - Quick retrieval of scientist profiles
 - Efficient updates to records
 - Secure, role-based access for authorized users only
+- Group-scoped management of employee information
 
 ---
 
@@ -34,13 +34,14 @@ To develop a **centralized, digital solution** that streamlines the management o
 - **Supervisor**:
 
   - Create & manage groups
-  - Add admins and assign them groups
+  - Add admins and assign them to groups
   - Add scientists and assign them to groups
-  - Full access across the organization
+  - View organization-level hierarchy and group assignments
 
 - **Admin**:
 
   - Manage scientists within their assigned group only
+  - Update scientist details and view relevant profile information
   - Cannot access or modify data outside their group
 
 ---
@@ -49,8 +50,8 @@ To develop a **centralized, digital solution** that streamlines the management o
 
 - **Authentication**: JWT-based login → redirects to dashboards based on role
 - **Dashboards**:
-  - `/supervisor-dashboard` – full organizational control
-  - `/admin-dashboard` – limited to own group
+  - `/SupervisorDashboard` – organization-level control
+  - `/AdminDashboard` – limited to the assigned group
 - **Sidebar Actions** (Supervisor only):
   - Add Group
   - Add Admin
@@ -61,14 +62,12 @@ To develop a **centralized, digital solution** that streamlines the management o
 
 ## 🧾 Core Features
 
-- 🔎 **Scientist Search**: Fetch full profile using employee number or name
+- 🔎 **Scientist Search**: Fetch profile information using employee ID or name
 - 📄 **Personal Info Management**: Name, DOB, contact, address, education, ID proofs
 - 💼 **Professional Details**: Designation, department, years of service
-- 💰 **Salary Records**: Pay grade, allowances, deductions, salary history
-- 📆 **Leave Management**: Leave balances, history, request tracking
-- 📁 **Document Repository**: Upload/view official documents (joining letter, NOCs, etc.)
-- 🔐 **Role-Based Access**: Supervisor and Admin levels, enforced on frontend + backend
-- 📊 **Analytics Dashboard** (future scope): Summary stats, charts, and trends
+- 📁 **Document Repository**: Upload and retrieve official documents via MinIO storage
+- 🔐 **Role-Based Access**: Supervisor and Admin levels enforced on both frontend and backend
+- 🧩 **Group-Based Mapping**: Scientists are associated with a specific group and accessed through group-scoped permissions
 
 ---
 
@@ -76,10 +75,10 @@ To develop a **centralized, digital solution** that streamlines the management o
 
 - ✅ Strict role-based access (frontend + backend)
 - ✅ Group-based scientist mapping (one scientist → one group)
-- ✅ Supervisor has organization-wide visibility
-- ✅ Fully functional backend with JWT authentication
-- ✅ Clean UI for both roles
-- ✅ Ready for deployment
+- ✅ Supervisor-level visibility across organization structure
+- ✅ JWT authentication and protected routes
+- ✅ Functional MySQL + MinIO-backed prototype
+- ✅ Clean dashboard UI for both roles
 
 ---
 
@@ -114,7 +113,7 @@ minio.exe server C:\<MinIO-storage-directory> --console-address :9001
 
 ## 📦 Status
 
-- ✅ Completed and functional system
-- 🔒 Secure role-based access with JWT
-- 📂 MinIO integrated for file/document storage
-- 🖥️ Ready for production deployment
+- ✅ Prototype implemented and functional for role-based scientist management
+- 🔒 JWT authentication and route protection are in place
+- 📂 MinIO is integrated for document upload and retrieval
+- 🧪 This project currently reflects a working internal dashboard prototype rather than a full production-ready HR system
